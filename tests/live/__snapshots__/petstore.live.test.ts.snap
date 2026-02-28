@@ -1,0 +1,26 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PetstoreClient live tests > captures a full-response approval snapshot 1`] = `
+{
+  "category": {
+    "id": 99,
+    "name": "portfolio",
+  },
+  "id": 0,
+  "name": "CodexDemoPet",
+  "photoUrls": [
+    "https://example.com/codex-demo-pet.png",
+  ],
+  "status": "available",
+  "tags": [
+    {
+      "id": 100,
+      "name": "api",
+    },
+    {
+      "id": 101,
+      "name": "automation",
+    },
+  ],
+}
+`;
