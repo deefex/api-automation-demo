@@ -1,7 +1,7 @@
 # API Automation Demo (TypeScript + Swagger Petstore)
 [![CI](https://github.com/deefex/api-automation-demo/actions/workflows/ci.yml/badge.svg)](https://github.com/deefex/api-automation-demo/actions/workflows/ci.yml)
 
-API automation test automation.
+A demo of API automation
 
 ## What this demonstrates
 
