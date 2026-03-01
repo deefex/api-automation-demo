@@ -23,6 +23,37 @@ A demo of API automation
 - Zod
 - Nock
 
+## The architecture jigsaw
+This is a conceptual view of how everything hangs together
+
+```mermaid
+flowchart LR
+    A["Vitest (test runner)"] --> B["Test Files<br/>mock + live"]
+    B --> C["PetstoreClient"]
+    C --> D["Axios (HTTP client)"]
+    C --> E["Zod (request/response validation)"]
+
+    subgraph Mocked Path
+      B --> M["Nock intercepts HTTP"]
+      M --> D
+      D --> N["No real network call"]
+    end
+
+    subgraph Live Path
+      D --> P["Swagger Petstore API"]
+    end
+
+    E --> Q["Typed, validated data<br/>for assertions"]
+    A --> R["Assertions + snapshots + reports"]
+    Q --> R
+```
+
+- `Vitest` runs the suite and performs assertions/snapshot checks.
+- `PetstoreClient` is the thin abstraction your tests call.
+- `Axios` performs HTTP requests.
+- `Zod` validates request and response payloads at runtime while keeping TypeScript types aligned.
+- `Nock` is used only for mock tests to intercept HTTP and avoid external dependencies.
+
 ## Project structure
 
 ```text
@@ -57,7 +88,7 @@ npm install
 2. Run deterministic mocked tests (recommended default)
 
 ```bash
-npm test
+npm run test:mock
 ```
 
 3. Run live Petstore tests
@@ -76,5 +107,5 @@ PETSTORE_BASE_URL=https://petstore.swagger.io/v2
 
 ## Notes
 
-- `npm test` only runs mock tests to keep CI stable and fast.
+- `npm run test:mock` runs only mock tests to keep CI stable and fast.
 - Live tests are intentionally separate because public API data/state can be unstable.
